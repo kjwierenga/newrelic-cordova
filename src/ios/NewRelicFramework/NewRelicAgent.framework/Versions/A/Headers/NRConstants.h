@@ -5,7 +5,7 @@
 //    https://docs.newrelic.com/docs/mobile-apps for information
 //    https://docs.newrelic.com/docs/releases/ios for release notes
 //
-//  Copyright (c) 2013 New Relic. All rights reserved.
+//  Copyright (c) 2014 New Relic. All rights reserved.
 //  See https://docs.newrelic.com/docs/licenses/ios-agent-licenses for license details
 //
 
@@ -26,6 +26,12 @@ enum NRTraceType {
     NRTraceTypeNetwork
 };
 
+#define kNRNetworkStatusDidChangeNotification @"com.newrelic.networkstatus.changed"
+#define kNRCarrierNameDidUpdateNotification   @"com.newrelic.carrierName.changed"
+#define kNRMemoryUsageDidChangeNotification   @"com.newrelic.memoryusage.changed"
+#define kNRInteractionDidCompleteNotification @"com.newrelic.interaction.complete"
+
+
 //Custom Metric Units
 typedef NSString NRMetricUnit;
 
@@ -33,11 +39,26 @@ typedef NSString NRMetricUnit;
 #define kNRMetricUnitBytes              (NRMetricUnit*)@"bytes"
 #define kNRMetricUnitSeconds            (NRMetricUnit*)@"sec"
 #define kNRMetricUnitsBytesPerSecond    (NRMetricUnit*)(@"bytes/second")
-#define kNRmetricUnitsOperations        (NRMetricUnit*)@"op"
+#define kNRMetricUnitsOperations        (NRMetricUnit*)@"op"
+
+
+#define kNRMAMetricSuffixCount           @"Count"
+#define kNRMAMetricSuffixTime            @"Time"
+
+#define kNRMASecondsPerMillisecond      0.001f
 
 #define kNRSupportabilityPrefix          @"Supportability/MobileAgent"
+#define kNRMAMetricActivityNetworkPrefix @"Mobile/Activity/Network"
+#define kNRAgentHealthPrefix             @"Supportability/AgentHealth"
+#define kNRMASessionStartMetric          @"Session/Start"
+
+#define kNRMAExceptionHandlerHijackedMetric kNRAgentHealthPrefix @"/Hijacked/ExceptionHandler"
 
 #define kNRCarrierNameCacheLifetime     50 // milliseconds
+#define kNRWanTypeCacheLifetime         25 // milliseconds
+#define kNRNetworkStatusCacheLifetime   25 // milliseconds
+
+#define kNRMA_MillisecondToSecondRatio .001f
 
 // Network Failure Codes
 enum NRNetworkFailureCode {
